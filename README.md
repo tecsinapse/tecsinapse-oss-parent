@@ -2,7 +2,7 @@ tecsinapse-oss-parent
 ==========
 [![License (LGPL version 3)](https://img.shields.io/badge/license-GNU%20LGPL%20version%203.0-blue.svg)](https://github.com/tecsinapse/tecsinapse-oss-parent/blob/master/LICENCE)
 [![Build Status](https://travis-ci.org/tecsinapse/tecsinapse-oss-parent.svg?branch=master)](https://travis-ci.org/tecsinapse/tecsinapse-oss-parent)
-[![Dependency Status](https://www.versioneye.com/user/projects/576ff9fb671894004e1a90c3/badge.svg)](https://www.versioneye.com/user/projects/576ff9fb671894004e1a90c3)
+[![Dependency Status](https://www.versioneye.com/user/projects/57895ff9c3d40f0046852013/badge.svg)](https://www.versioneye.com/user/projects/57895ff9c3d40f0046852013)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/)
 
 Using tecsinapse-oss-parent
