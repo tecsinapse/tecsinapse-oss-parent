@@ -11,6 +11,8 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <name>TecSinapse OSS Parent POM</name>
+
     <url>https://github.com/tecsinapse/tecsinapse-oss-parent</url>
 
     <licenses>
