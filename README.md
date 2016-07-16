@@ -5,28 +5,20 @@ tecsinapse-oss-parent
 [![Dependency Status](https://www.versioneye.com/user/projects/57895ff9c3d40f0046852013/badge.svg)](https://www.versioneye.com/user/projects/57895ff9c3d40f0046852013)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/)
 
+`tecsinapse-oss-parent`is the parent Maven POM for TecSinapse open source projects.
+
 Using tecsinapse-oss-parent
 ---
 
-Maven:
-
 ``` xml
-<dependency>
+<parent>
   <groupId>br.com.tecsinapse</groupId>
   <artifactId>tecsinapse-oss-parent</artifactId>
   <version>1.0.0</version>
-</dependency>
-```
-
-Gradle:
-
-```groovy
-compile "br.com.tecsinapse:tecsinapse-oss-parent:1.0.0"
+</parent>
 ```
 
 If you want to use snapshots first config OSS Sonatype Snapshots repository:
-
-Maven:
 
 ``` xml
 <repositories>
@@ -41,30 +33,14 @@ Maven:
 </repositories>
 ```
 
-Gradle:
-
-```groovy
-repositories {
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
-    }
-}
-```
-
 And then the dependency:
 
 ``` xml
-<dependency>
+<parent>
   <groupId>br.com.tecsinapse</groupId>
   <artifactId>tecsinapse-oss-parent</artifactId>
   <version>1.0.1-SNAPSHOT</version>
-</dependency>
-```
-
-Gradle:
-
-```groovy
-compile 'br.com.tecsinapse:tecsinapse-oss-parent:1.0.0-SNAPSHOT'
+</parent>
 ```
 
 Need help or found an issue?
