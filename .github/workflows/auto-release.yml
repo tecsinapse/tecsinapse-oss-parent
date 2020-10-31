@@ -40,7 +40,7 @@ jobs:
           echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
           git config --global user.email "dev+oss@tecsinapse.com.br"
           git config --global user.name "Tecsinapse Release Bot"
-          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +refs/heads/master*:refs/remotes/origin/master* +refs/tags/master*:refs/tags/master*
+          git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules
           git checkout --progress --force -B master refs/remotes/origin/master
           git merge release/rc
           git flow version || echo "NO GITFLOW"
