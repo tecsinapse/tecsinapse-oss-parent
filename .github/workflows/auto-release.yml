@@ -47,7 +47,7 @@ jobs:
           echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
           git config --global user.email "dev+oss@tecsinapse.com.br"
           git config --global user.name "Tecsinapse Release Bot"
-          git checkout --progress --force -B master refs/remotes/origin/master
+          git checkout --progress --force -B master origin/master
           git merge release/rc
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
