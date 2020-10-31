@@ -31,12 +31,6 @@ jobs:
         run: mvn -B -Psonar clean package sonar:sonar --file pom.xml
         env:
           SONAR_TOKEN: ${{ secrets.OSS_SONAR_TOKEN }}
-      - name: New release
-        run: |
-          mvn release:prepare release:perform -DpushChanges=false -f pom.xml
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
       - name: Configure SSH and Push
         run: |
           mkdir -p ~/.ssh
@@ -50,8 +44,15 @@ jobs:
           echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
           git config --global user.email "dev+oss@tecsinapse.com.br"
           git config --global user.name "Tecsinapse Release Bot"
-          git push --tags
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+      - name: New release
+        run: |
+          mvn release:prepare release:perform -DpushChanges=false -f pom.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
