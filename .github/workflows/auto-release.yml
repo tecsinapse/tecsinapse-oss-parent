@@ -16,16 +16,28 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          server-id: sonatype-nexus
+          server-username: OSS_SONATYPE_USERNAME
+          server-password: OSS_SONATYPE_PASSWORD
+          gpg-passphrase: OSS_GPG_PASSPHRASE
+          gpg-private-key: ${{ secrets.OSS_GPG_PRIVATE_KEY }}
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Configure GIT
-        shell: bash
-        run: git config --global user.email "dev+oss@tecsinapse.com.br" && git config --global user.name "Tecsinapse Release Bot"
-      - name: Configure SSH
+      - name: Build and Sonar
+        run: mvn -B -Psonar clean package sonar:sonar --file pom.xml
+        env:
+          SONAR_TOKEN: ${{ secrets.OSS_SONAR_TOKEN }}
+      - name: New release
+        run: |
+          mvn release:prepare release:perform -DpushChanges=false -f pom.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
+      - name: Configure SSH and Push
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
@@ -36,14 +48,10 @@ jobs:
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           export SSH_ASKPASS=~/.askpass.sh
           echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
+          git config --global user.email "dev+oss@tecsinapse.com.br"
+          git config --global user.name "Tecsinapse Release Bot"
+          git push --tags
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-      - name: New release
-        run: mvn release:prepare release:perform -DskipTests -f pom.xml
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        #git-release-bot-name: "Tecsinapse Release Bot"
-        #git-release-bot-email: "dev+oss@tecsinapse.com.br"
