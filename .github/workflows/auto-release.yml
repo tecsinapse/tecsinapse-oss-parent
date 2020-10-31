@@ -26,14 +26,21 @@ jobs:
         shell: bash
         run: git config --global user.email "dev+oss@tecsinapse.com.br" && git config --global user.name "Tecsinapse Release Bot"
       - name: Configure SSH
-        shell: bash
-        run: echo "SSH_DEPLOY_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && ssh-keyscan github.com
+        run: |
+          echo "SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/id_rsa
         env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       - name: New release
         run: mvn release:prepare release:perform -DskipTests -f pom.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         #git-release-bot-name: "Tecsinapse Release Bot"
         #git-release-bot-email: "dev+oss@tecsinapse.com.br"
