@@ -22,6 +22,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - shell: bash
+        run: git config --global user.email "dev+oss@tecsinapse.com.br" && git config --global user.name "Tecsinapse Release Bot"
       - name: New release
         run: mvn release:prepare release:perform -DskipTests -f pom.xml
         #git-release-bot-name: "Tecsinapse Release Bot"
