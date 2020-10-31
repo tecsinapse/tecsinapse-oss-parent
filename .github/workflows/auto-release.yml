@@ -34,7 +34,8 @@ jobs:
           chmod +x ~/.askpass.sh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          echo "$SSH_DEPLOY_KEY_PASS"| SSH_ASKPASS=~/.askpass.sh ssh-add ~/.ssh/id_rsa #2> /dev/null
+          export SSH_ASKPASS=~/.askpass.sh
+          echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
