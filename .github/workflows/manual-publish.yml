@@ -38,5 +38,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
+          GPG_PASSPHRASE: ${{ secrets.OSS_GPG_PASSPHRASE }}
           SONATYPE_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
