@@ -22,11 +22,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Release
-        uses: qcastel/github-actions-maven-release@master
-        with:
-          release-branch-name: "release/rc"
-          git-release-bot-name: "Tecsinapse Release Bot"
-          git-release-bot-email: "dev+oss@tecsinapse.com.br"
-          access-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-#          maven-args: "-DskipTests"
+      - name: New release
+        run: mvn release:prepare release:perform -DskipTests -f pom.xml
+      - name: Push
+        #git-release-bot-name: "Tecsinapse Release Bot"
+        #git-release-bot-email: "dev+oss@tecsinapse.com.br"
