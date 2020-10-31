@@ -37,6 +37,7 @@
         <testng.version>6.9.10</testng.version>
 
         <!-- plugins -->
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
@@ -165,6 +166,11 @@
                         <repoToken>${env.COVERALLS_TOKEN}</repoToken>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -219,8 +225,8 @@
     </issueManagement>
 
     <ciManagement>
-        <system>Travis CI</system>
-        <url>https://travis-ci.org/tecsinapse/tecsinapse-oss-parent</url>
+        <system>Github Actions CI</system>
+        <url>https://github.com/tecsinapse/tecsinapse-oss-parent/actions</url>
     </ciManagement>
 
     <dependencyManagement>
@@ -241,10 +247,6 @@
             <properties>
                 <gpg.executable>gpg</gpg.executable>
                 <gpg.defaultKeyring>false</gpg.defaultKeyring>
-                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
-                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
-                <gpg.publicKeyring>${env.GPG_DIR}/pubring.gpg</gpg.publicKeyring>
-                <gpg.secretKeyring>${env.GPG_DIR}/secring.gpg</gpg.secretKeyring>
             </properties>
             <activation>
                 <property>
@@ -280,6 +282,21 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>sonar</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+            <properties>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.organization>tecsinapse-oss</sonar.organization>
+            </properties>
         </profile>
     </profiles>
 
