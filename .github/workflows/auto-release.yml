@@ -49,6 +49,7 @@ jobs:
           git config --global user.name "Tecsinapse Release Bot"
           git checkout --progress --force -B master origin/master
           git merge release/rc
+          git flow version || echo "NO GITFLOW"
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
