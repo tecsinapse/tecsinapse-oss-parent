@@ -26,8 +26,7 @@ jobs:
         uses: qcastel/github-actions-maven-release@master
         with:
           release-branch-name: "release/rc"
-
           git-release-bot-name: "Tecsinapse Release Bot"
           git-release-bot-email: "dev+oss@tecsinapse.com.br"
-
           access-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+#          maven-args: "-DskipTests"
