@@ -31,10 +31,11 @@ jobs:
           echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo "#!/bin/sh\nexec cat" > ~/.askpass.sh
+          chmod +x ~/.askpass.sh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add ~/.ssh/id_rsa
-          echo "$SSH_DEPLOY_KEY_PASS"| SSH_ASKPASS=~/.askpass.sh ssh-add ~/.ssh/id_rsa 2> /dev/null
+          echo "$SSH_DEPLOY_KEY_PASS"| SSH_ASKPASS=~/.askpass.sh ssh-add ~/.ssh/id_rsa #2> /dev/null
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           SSH_DEPLOY_KEY_PASS: ${{ secrets.SSH_DEPLOY_KEY_PASS }}
