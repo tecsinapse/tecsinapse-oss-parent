@@ -43,7 +43,7 @@ jobs:
           git config --global user.email "dev+oss@tecsinapse.com.br"
           git config --global user.name "Tecsinapse Release Bot"
           git fetch
-          git merge release/rc
+          git merge origin/release/rc
           git flow version || echo "NO GITFLOW"
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
