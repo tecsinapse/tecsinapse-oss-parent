@@ -54,7 +54,7 @@
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <!-- Sonar -->
         <sonar.projectKey>br.com.tecsinapse:${artifactId}</sonar.projectKey>
-        <sonar.projectName>TecSinapse OSS Parente</sonar.projectName>
+        <sonar.projectName>TecSinapse OSS Parent</sonar.projectName>
     </properties>
 
     <build>
