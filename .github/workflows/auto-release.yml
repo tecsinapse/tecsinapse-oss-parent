@@ -24,6 +24,5 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: New release
         run: mvn release:prepare release:perform -DskipTests -f pom.xml
-      - name: Push
         #git-release-bot-name: "Tecsinapse Release Bot"
         #git-release-bot-email: "dev+oss@tecsinapse.com.br"
