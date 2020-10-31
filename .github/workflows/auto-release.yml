@@ -30,6 +30,7 @@ jobs:
       - name: Build and Sonar
         run: mvn -B -Psonar clean package sonar:sonar --file pom.xml
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           SONAR_TOKEN: ${{ secrets.OSS_SONAR_TOKEN }}
       - name: Configure SSH and Push
         run: |
