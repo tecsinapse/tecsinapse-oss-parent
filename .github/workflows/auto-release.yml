@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref:
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -45,7 +47,7 @@ jobs:
           echo "$SSH_DEPLOY_KEY_PASS"| ssh-add ~/.ssh/id_rsa #2> /dev/null
           git config --global user.email "dev+oss@tecsinapse.com.br"
           git config --global user.name "Tecsinapse Release Bot"
-          git checkout master
+          git checkout --progress --force -B master refs/remotes/origin/master
           git merge release/rc
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -53,7 +55,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       - name: New release
         run: |
-          mvn release:prepare release:perform -DpushChanges=false -f pom.xml
+          mvn release:prepare release:perform -DpushChanges=true -f pom.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
