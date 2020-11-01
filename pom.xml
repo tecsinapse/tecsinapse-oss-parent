@@ -269,7 +269,9 @@
                                         <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
                                     </gpgArguments>
+                                    <executable>gpg</executable>
                                     <passphrase>${gpg.passphrase}</passphrase>
+                                    <keyname>${env.GPG_KEYNAME}</keyname>
                                 </configuration>
                             </execution>
                         </executions>
