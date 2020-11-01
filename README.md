@@ -1,7 +1,7 @@
 tecsinapse-oss-parent
 ==========
 [![License (LGPL version 3)](https://img.shields.io/badge/license-GNU%20LGPL%20version%203.0-blue.svg)](https://github.com/tecsinapse/tecsinapse-oss-parent/blob/master/LICENCE)
-[![Auto build CI](https://github.com/tecsinapse/tecsinapse-oss-parent/workflows/Auto%20build%20CI/badge.svg)]
+![Auto build CI](https://github.com/tecsinapse/tecsinapse-oss-parent/workflows/Auto%20build%20CI/badge.svg)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/br.com.tecsinapse/tecsinapse-oss-parent/)
 
 `tecsinapse-oss-parent`is the parent Maven POM for TecSinapse open source projects.

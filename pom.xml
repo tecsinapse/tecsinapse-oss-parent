@@ -247,7 +247,7 @@
         <profile>
             <id>sonatype-nexus</id>
             <properties>
-                <gpg.executable>gpg</gpg.executable>
+                <gpg.executable>gpg2</gpg.executable>
                 <gpg.defaultKeyring>false</gpg.defaultKeyring>
             </properties>
             <activation>
@@ -268,6 +268,14 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <executable>gpg2</executable>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                    <passphrase>${gpg.passphrase}</passphrase>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

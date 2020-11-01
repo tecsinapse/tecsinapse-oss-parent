@@ -19,9 +19,9 @@ jobs:
         with:
           java-version: 1.8
           server-id: sonatype-nexus
-          server-username: OSS_SONATYPE_USERNAME
-          server-password: OSS_SONATYPE_PASSWORD
-          gpg-passphrase: OSS_GPG_PASSPHRASE
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
+          gpg-passphrase: GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.OSS_GPG_PRIVATE_KEY }}
       - name: Cache Maven packages
         uses: actions/cache@v1
@@ -51,8 +51,10 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       - name: New release
         run: |
-          mvn release:prepare release:perform -DpushChanges=true -f pom.xml
+          mvn release:prepare release:perform -DpushChanges=true -f -P pom.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          GPG_KEYNAME: ${{ secrets.OSS_GPG_KEYNAME }}
+          SONATYPE_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
