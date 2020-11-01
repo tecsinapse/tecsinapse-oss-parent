@@ -51,7 +51,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       - name: New release
         run: |
-          mvn release:prepare release:perform -DpushChanges=true -f pom.xml
+          mvn release:prepare release:perform -DpushChanges=true -DperformRelease=true -f pom.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
