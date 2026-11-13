@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: tecsinapse-oss-parent
+  title: tecsinapse-oss-parent
+  description: >
+    POM parent dos projetos open source.
+  labels:
+    tecsinapse.com/lifecycle: ativo
+spec:
+  owner: group:default/kaizen
