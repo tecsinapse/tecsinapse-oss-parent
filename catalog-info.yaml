@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: tecsinapse-oss-parent-catalog
+  description: Entidades do tecsinapse-oss-parent no Backstage
+spec:
+  type: url
+  targets:
+    - ./catalog/system-tecsinapse-oss-parent.yaml
+    - ./catalog/tecsinapse-oss-parent.yaml
